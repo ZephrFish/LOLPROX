@@ -1,0 +1,55 @@
+discovery:
+  label: Discovery
+  description: Gathering information about the environment
+
+execution:
+  label: Execution
+  description: Running code or commands
+
+persistence:
+  label: Persistence
+  description: Maintaining access across reboots
+
+privilege escalation:
+  label: Privilege Escalation
+  description: Gaining higher privileges
+
+defense evasion:
+  label: Defense Evasion
+  description: Avoiding detection
+
+credential access:
+  label: Credential Access
+  description: Stealing credentials
+
+collection:
+  label: Collection
+  description: Gathering data for exfiltration
+
+lateral movement:
+  label: Lateral Movement
+  description: Moving to other systems
+
+command and control:
+  label: Command and Control
+  description: Communicating with attacker infrastructure
+
+exfiltration:
+  label: Exfiltration
+  description: Stealing data
+
+impact:
+  label: Impact
+  description: Destructive operations
+
+account enumeration:
+  label: Account Enumeration
+  description: Discovering user accounts
+
+permission enumeration:
+  label: Permission Enumeration
+  description: Discovering access permissions
+
+configuration:
+  label: Configuration
+  description: Modifying system configuration

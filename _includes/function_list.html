@@ -1,0 +1,7 @@
+<div class="function-list">
+	{%- assign categories = include.bin.Commands | group_by:"Category" -%}
+	{%- for cat in categories -%}
+	{%- assign type = cat.name | downcase -%}
+	<div><a href="{{ include.bin.url | relative_url }}#{{ type | url_encode | replace:'+','%20'}}">{{ site.data.functions[type].label }}</a></div>
+	{%- endfor -%}
+</div>

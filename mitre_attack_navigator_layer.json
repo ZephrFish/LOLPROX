@@ -1,0 +1,416 @@
+{
+    "name": "LOLPROX - Proxmox VE Living Off The Land",
+    "versions": {
+        "attack": "14",
+        "navigator": "4.9.1",
+        "layer": "4.5"
+    },
+    "domain": "enterprise-attack",
+    "description": "MITRE ATT&CK techniques mapped to LOLPROX Proxmox VE binaries and capabilities",
+    "filters": {
+        "platforms": [
+            "Linux"
+        ]
+    },
+    "sorting": 0,
+    "layout": {
+        "layout": "side",
+        "aggregateFunction": "average",
+        "showID": true,
+        "showName": true,
+        "showAggregateScores": false,
+        "countUnscored": false
+    },
+    "hideDisabled": false,
+    "techniques": [
+        {
+            "techniqueID": "T1082",
+            "tactic": "discovery",
+            "color": "#ff6666",
+            "comment": "pveversion, pvesh, qm list, pct list, pvecm, pvesm, pve-firewall - System and infrastructure discovery",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1087",
+            "tactic": "discovery",
+            "color": "#ff6666",
+            "comment": "pveum user list, pvesh /access/users - Account enumeration",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1087.001",
+            "tactic": "discovery",
+            "color": "#ff6666",
+            "comment": "pveum user list - Local account discovery",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1069",
+            "tactic": "discovery",
+            "color": "#ff6666",
+            "comment": "pveum acl list, pveum group list - Permission and group discovery",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1069.001",
+            "tactic": "discovery",
+            "color": "#ff6666",
+            "comment": "pveum acl list - Local groups and permissions",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1135",
+            "tactic": "discovery",
+            "color": "#ff6666",
+            "comment": "pvesm scan nfs - Network share discovery",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1059",
+            "tactic": "execution",
+            "color": "#ff9900",
+            "comment": "qm guest exec, pct exec, qm monitor - Command execution in guests",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1059.004",
+            "tactic": "execution",
+            "color": "#ff9900",
+            "comment": "socat EXEC:/bin/bash - Unix shell execution via vsock",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1105",
+            "tactic": "command-and-control",
+            "color": "#9933ff",
+            "comment": "qm guest cmd file-write, pct push - File transfer to guests",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1005",
+            "tactic": "collection",
+            "color": "#66ccff",
+            "comment": "qm guest cmd file-read, pct pull, vzdump - Data collection from guests",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1074",
+            "tactic": "collection",
+            "color": "#66ccff",
+            "comment": "qm snapshot, pct snapshot, vzdump - Data staging via snapshots",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1074.001",
+            "tactic": "collection",
+            "color": "#66ccff",
+            "comment": "qm snapshot, vzdump - Local data staging",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1552",
+            "tactic": "credential-access",
+            "color": "#ffcc00",
+            "comment": "/etc/pve/priv/*, cloud-init dumps - Unsecured credentials",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1552.001",
+            "tactic": "credential-access",
+            "color": "#ffcc00",
+            "comment": "/etc/pve/user.cfg, /etc/pve/priv/token.cfg - Credentials in files",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1552.004",
+            "tactic": "credential-access",
+            "color": "#ffcc00",
+            "comment": "/etc/pve/priv/pve-root-ca.key, authkey.key - Private keys",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1136",
+            "tactic": "persistence",
+            "color": "#00cc66",
+            "comment": "pveum user add, pvesh /access/users - Account creation",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1136.001",
+            "tactic": "persistence",
+            "color": "#00cc66",
+            "comment": "pveum user add - Local account creation",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1098",
+            "tactic": "persistence",
+            "color": "#00cc66",
+            "comment": "pveum acl modify - Account manipulation and privilege escalation",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1098.001",
+            "tactic": "persistence",
+            "color": "#00cc66",
+            "comment": "pveum user token add - API token creation",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1610",
+            "tactic": "defense-evasion",
+            "color": "#cc6699",
+            "comment": "pct create - Deploy containers for persistence",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1611",
+            "tactic": "privilege-escalation",
+            "color": "#ff3366",
+            "comment": "pct set -mp0 - Container escape via host mounts",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1562",
+            "tactic": "defense-evasion",
+            "color": "#cc6699",
+            "comment": "pve-firewall, pvesh - Impair defenses",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1562.004",
+            "tactic": "defense-evasion",
+            "color": "#cc6699",
+            "comment": "pve-firewall disable - Disable/modify firewall",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1572",
+            "tactic": "command-and-control",
+            "color": "#9933ff",
+            "comment": "socat VSOCK-CONNECT - Protocol tunneling via vsock",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1090",
+            "tactic": "command-and-control",
+            "color": "#9933ff",
+            "comment": "socat TCP-LISTEN/VSOCK-CONNECT - Connection proxy",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": true
+        },
+        {
+            "techniqueID": "T1090.001",
+            "tactic": "command-and-control",
+            "color": "#9933ff",
+            "comment": "socat port forwarding - Internal proxy",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1529",
+            "tactic": "impact",
+            "color": "#990000",
+            "comment": "qm stop, pct stop - System shutdown",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1485",
+            "tactic": "impact",
+            "color": "#990000",
+            "comment": "qm destroy, pct destroy - Data destruction",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1489",
+            "tactic": "impact",
+            "color": "#990000",
+            "comment": "qm stop, pvecm expected - Service stop",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1567",
+            "tactic": "exfiltration",
+            "color": "#6666ff",
+            "comment": "vzdump --dumpdir, pvesm export - Exfiltration over web service",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1078",
+            "tactic": "persistence",
+            "color": "#00cc66",
+            "comment": "API tokens, user accounts - Valid accounts",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        },
+        {
+            "techniqueID": "T1548",
+            "tactic": "privilege-escalation",
+            "color": "#ff3366",
+            "comment": "pct set --features - Abuse elevation control",
+            "enabled": true,
+            "metadata": [],
+            "links": [],
+            "showSubtechniques": false
+        }
+    ],
+    "gradient": {
+        "colors": [
+            "#ffffff",
+            "#ff6666"
+        ],
+        "minValue": 0,
+        "maxValue": 100
+    },
+    "legendItems": [
+        {
+            "label": "Discovery",
+            "color": "#ff6666"
+        },
+        {
+            "label": "Execution",
+            "color": "#ff9900"
+        },
+        {
+            "label": "Persistence",
+            "color": "#00cc66"
+        },
+        {
+            "label": "Privilege Escalation",
+            "color": "#ff3366"
+        },
+        {
+            "label": "Defense Evasion",
+            "color": "#cc6699"
+        },
+        {
+            "label": "Credential Access",
+            "color": "#ffcc00"
+        },
+        {
+            "label": "Collection",
+            "color": "#66ccff"
+        },
+        {
+            "label": "Command and Control",
+            "color": "#9933ff"
+        },
+        {
+            "label": "Exfiltration",
+            "color": "#6666ff"
+        },
+        {
+            "label": "Impact",
+            "color": "#990000"
+        }
+    ],
+    "metadata": [
+        {
+            "name": "Project",
+            "value": "LOLPROX - Living Off The Land Proxmox"
+        },
+        {
+            "name": "Version",
+            "value": "1.0"
+        },
+        {
+            "name": "Created",
+            "value": "2025-12-06"
+        }
+    ],
+    "links": [],
+    "showTacticRowBackground": true,
+    "tacticRowBackground": "#dddddd",
+    "selectTechniquesAcrossTactics": true,
+    "selectSubtechniquesWithParent": false
+}

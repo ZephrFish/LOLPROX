@@ -1,0 +1,124 @@
+---
+layout: common
+---
+
+{% include page_title.html title=page.Name %}
+{% include function_list.html bin=page %}
+
+<p>{{ page.Description | markdownify }}</p>
+
+{% if page.Full_Path %}
+<h2 id="paths">Paths</h2>
+<ul>
+{%- for path in page.Full_Path -%}
+    <li><code>{{ path.Path }}</code></li>
+{%- endfor -%}
+</ul>
+{% endif %}
+
+{% if page.Resources %}
+<h2 id="resources">Resources</h2>
+<ul>
+{%- for resource in page.Resources -%}
+    <li><a href="{{ resource.Link }}" data-shorten>{{ resource.Link }}</a></li>
+{%- endfor -%}
+</ul>
+{% endif %}
+
+{% if page.Detection %}
+<h2 id="detection">Detection</h2>
+<ul>
+{%- for detection in page.Detection -%}
+    {%- if detection.Note -%}
+    <li>{{ detection.Note }}</li>
+    {%- elsif detection.Sigma -%}
+    <li><img class="external-favicon" src="https://www.google.com/s2/favicons?domain=github.com"> Sigma: <a href="{{ detection.Sigma }}" data-shorten>{{ detection.Sigma }}</a></li>
+    {%- elsif detection.Elastic -%}
+    <li><img class="external-favicon" src="https://www.google.com/s2/favicons?domain=elastic.co"> Elastic: <a href="{{ detection.Elastic }}" data-shorten>{{ detection.Elastic }}</a></li>
+    {%- endif -%}
+{%- endfor -%}
+</ul>
+{% endif %}
+
+{% if page.AtomicTests %}
+<h2 id="atomictests">Atomic Tests</h2>
+<ul>
+{%- for test in page.AtomicTests -%}
+    <li><a href="{{ test }}" data-shorten>{{ test }}</a></li>
+{%- endfor -%}
+</ul>
+{% endif %}
+
+{% if page.Acknowledgement %}
+<h2 id="acknowledgements">Acknowledgements</h2>
+<ul class="acknowledgements">
+{%- for person in page.Acknowledgement -%}
+    <li>
+    {%- if person.Handle -%}
+        <a href="https://twitter.com/{{ person.Handle | remove: '@' }}">{{ person.Person }}</a>
+    {%- else -%}
+        {{ person.Person }}
+    {%- endif -%}
+    </li>
+{%- endfor -%}
+</ul>
+{% endif %}
+
+{%- assign categories = page.Commands | group_by:"Category" -%}
+{%- for category in categories -%}
+{%- assign type = category.name | downcase -%}
+<h2 class="function-name" id="{{ type | url_encode | replace:'+','%20'}}">{{ site.data.functions[type].label }}</h2>
+
+<ol>
+{%- for command in category.items -%}
+<li>
+    <p>{{ command.Description }}</p>
+    <pre><code>{{ command.Command }}</code></pre>
+
+    <div class="properties">
+        <div class="row">
+            <span class="property">Use Case</span>
+            <span>{{ command.Usecase }}</span>
+        </div>
+        <div class="row">
+            <span class="property">Privileges Required</span>
+            <span>{{ command.Privileges }}</span>
+        </div>
+        <div class="row">
+            <span class="property">Operating System</span>
+            <span>{{ command.OperatingSystem }}</span>
+        </div>
+    </div>
+
+    {% if command.ProceduralExamples %}
+    <h3>Procedural Examples</h3>
+    <ul class="examples">
+    {%- for example in command.ProceduralExamples -%}
+        <li><pre><code>{{ example }}</code></pre></li>
+    {%- endfor -%}
+    </ul>
+    {% endif %}
+
+    {% if command.MitreID and command.MitreID != "" %}
+    <div class="row middle">
+        <span class="property">ATT&CK Technique</span>
+        <span data-attack-tid="{{ command.MitreID }}">{{ command.MitreID }}</span>
+    </div>
+    {% endif %}
+
+    {% if command.Tags %}
+    <dl class="tags row">
+        <dt class="property">Tags</dt>
+        <dd>
+        {%- for tag in command.Tags -%}
+            <span class="tag">{{ tag }}</span>
+        {%- endfor -%}
+        </dd>
+    </dl>
+    {% endif %}
+</li>
+{%- endfor -%}
+</ol>
+{%- endfor -%}
+
+<script src="{{ '/assets/url_helper.js' | relative_url }}"></script>

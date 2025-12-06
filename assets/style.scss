@@ -1,0 +1,540 @@
+---
+---
+
+// Color variables
+$accent: #E57000;
+$lighter: rgba($accent, 0.1);
+$hover: darken($accent, 10%);
+
+// CSS custom properties for theming
+:root {
+    --bg-color: #ffffff;
+    --text-color: #222222;
+    --border-color: #eeeeee;
+    --border-color-dark: #dddddd;
+    --code-bg: #{$lighter};
+    --table-hover: #{$lighter};
+    --tooltip-bg: #ffffff;
+    --search-bg: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg-color: #1a1a2e;
+    --text-color: #e0e0e0;
+    --border-color: #333355;
+    --border-color-dark: #444466;
+    --code-bg: rgba(229, 112, 0, 0.15);
+    --table-hover: rgba(229, 112, 0, 0.1);
+    --tooltip-bg: #252540;
+    --search-bg: #252540;
+}
+
+// Theme toggle button
+.theme-toggle {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background: var(--bg-color);
+    border: 1px solid var(--border-color-dark);
+    border-radius: 5px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--text-color);
+    z-index: 1000;
+
+    &:hover {
+        border-color: $accent;
+    }
+}
+
+
+// Apply theme colors to base elements
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+// layout
+
+$column-width: 900px;
+$grace-space: 200px;
+$layout-break: "(min-width: #{$column-width + $grace-space})";
+
+@media #{$layout-break} {
+    body {
+        width: $column-width;
+        margin: 40px auto;
+    }
+
+    p {
+        text-align: justify;
+    }
+}
+
+@media not all and #{$layout-break} {
+    .github-corner {
+        display: none;
+    }
+
+    .acknowledgements {
+        column-count: 2 !important;
+    }
+}
+
+@media (max-width: 500px) {
+    .header-box {
+        flex-direction: column;
+    }
+
+    #bin-table th:nth-child(3), #bin-table td:nth-child(3),
+    #bin-table th:nth-child(4), #bin-table td:nth-child(4){
+        display:none;
+    }
+
+    .tag .tag-tooltip {
+        width: max-content;
+        max-width: 60vw !important;
+        transform: translate(-60%, calc(-100% - 2em));
+    }
+
+    ol:has(> :nth-child(2)) {
+        padding-left: 1em !important;
+    }
+
+    .properties .row {
+        flex-wrap: wrap;
+
+        .property {
+            min-width: unset;
+            width: unset;
+        }
+    }
+
+    h2.function-name {
+        margin-top: 1em !important;
+        padding-top: 1em;
+        border-top: 1px dotted var(--border-color-dark);
+    }
+}
+
+// common tags
+
+body {
+    font-family: sans, sans-serif;
+    word-break: break-word;
+}
+
+code {
+    padding: 0.15em 0.25em;
+    border-radius: 0.25em;
+    color: $accent;
+    background: var(--code-bg);
+}
+
+pre {
+    background: var(--code-bg);
+    padding: 1em;
+    overflow-x: auto;
+    white-space: pre-wrap;
+
+    code {
+        padding: 0;
+        border-radius: 0;
+        background: transparent;
+    }
+}
+
+a:link, a:visited {
+    color: $accent;
+}
+
+a:hover {
+    color: $hover;
+}
+
+// permalink on headings
+
+h2, h3, h4, h5, h5 {
+    .permalink {
+        margin-left: 5px;
+        text-decoration: none;
+        visibility: hidden;
+
+        &::before {
+            content: "#";
+        }
+    }
+
+    &:target {
+        border-left: 5px solid $accent;
+        padding-left: 5px;
+    }
+
+    &:hover {
+        .permalink {
+            visibility: visible;
+        }
+    }
+}
+
+// binary list and search
+
+#bin-search {
+    margin-top: 1em;
+    padding: 0.5em;
+    width: 100%;
+    box-sizing: border-box;
+    background: var(--search-bg);
+    color: var(--text-color);
+    border: 1px solid var(--border-color-dark);
+}
+
+#bin-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1em;
+    table-layout: auto;
+
+    th, td {
+        padding: 0.5em 0.75em;
+        vertical-align: top;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    thead th {
+        text-align: left;
+        font-weight: bold;
+        font-size: 1rem;
+        border-bottom: 2px solid $accent;
+        background: none;
+        color: inherit;
+        white-space: nowrap;
+    }
+
+    // Binary name column - don't wrap, auto width
+    td.bin-name,
+    th:nth-child(1) {
+        white-space: nowrap;
+        width: 1%;
+    }
+
+    // Type column - don't wrap, auto width
+    td.bin-type,
+    th:nth-child(2) {
+        white-space: nowrap;
+        width: 1%;
+    }
+
+    // Tags column
+    td:nth-child(4),
+    th:nth-child(4) {
+        white-space: nowrap;
+        width: 1%;
+    }
+
+    // ATT&CK column
+    td:nth-child(5),
+    th:nth-child(5) {
+        white-space: nowrap;
+        width: 1%;
+    }
+
+    tbody tr:hover {
+        background: var(--table-hover);
+    }
+
+    #search-message {
+        display: none;
+        text-align: center;
+        padding: 1em;
+    }
+
+    // Function tiles in table
+    .function-list {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 3px 5px;
+        margin: 0;
+
+        div {
+            display: inline-block;
+            padding: 0.2em 0.5em;
+            font-size: 0.75rem;
+            border: 1px solid $accent;
+            white-space: nowrap;
+
+            a {
+                text-decoration: none;
+                color: $accent;
+            }
+        }
+    }
+
+    // Attack technique list
+    .attack-technique-list {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 3px 5px;
+
+        div {
+            display: inline-block;
+            padding: 0.15em 0.4em;
+            font-size: 0.7rem;
+            border: 1px solid var(--border-color-dark);
+            white-space: nowrap;
+        }
+    }
+}
+
+// General table styling (for markdown tables)
+table:not(#bin-table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+
+    th, td {
+        padding: 0.5em 0.75em;
+        border: 1px solid var(--border-color-dark);
+        text-align: left;
+    }
+
+    th {
+        background: var(--code-bg);
+        font-weight: bold;
+    }
+
+    tr:hover {
+        background: var(--table-hover);
+    }
+}
+
+// function description
+
+.function-list {
+    display: flex;
+    flex-wrap: wrap;
+    font-size: 0.8rem;
+    gap: 1px 3px;
+    div {
+        flex-basis: 1;
+        display: inline-block;
+        padding: 0.25em 0.5em;
+        border: 1px solid $accent;
+
+        a:link, a:visited {
+            color: $accent;
+            text-decoration: none;
+        }
+
+        &:hover, a:hover {
+            color: $hover;
+            border-color: $hover;
+        }
+    }
+}
+
+.attack-technique-list {
+    font-size: x-small;
+}
+
+// bin examples
+
+.examples {
+    display: table;
+    width: 100%;
+    table-layout: fixed;
+    counter-reset: item;
+    margin: 0;
+    padding: 0;
+
+    li {
+        display: table-row;
+
+        &:not(:only-child):before {
+            display: table-cell;
+            font-size: 0.8rem;
+            font-weight: bold;
+            width: 3em;
+            text-align: center;
+        }
+    }
+}
+
+// other classes
+
+.logo {
+    $margin: 20px;
+    float: right;
+    width: 100px;
+    height: 100px;
+    margin-left: $margin;
+    margin-bottom: $margin;
+}
+
+.bin-name {
+    font-family: Consolas, monospace;
+    font-size: 1.2rem;
+}
+
+.function-name {
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.attack-technique-id {
+    font-weight: bold;
+}
+
+.github-buttons {
+    display: inline-block;
+    margin-left: 10px;
+
+    // avoid displaying the link text during loading
+    a.github-button {
+        visibility: hidden;
+    }
+}
+
+.header-box {
+    display: flex;
+}
+
+ul {
+    margin: 0;
+    list-style-position: inside;
+    padding-left: 0;
+}
+
+.row ul {
+    list-style: none;
+
+}
+
+.row li+li {
+    margin: 0;
+}
+
+.external-favicon {
+    width: 16px;
+    vertical-align: middle;
+}
+
+#contributors {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: flex-start;
+    gap: 1px 5px;
+    min-height: 50px;
+}
+
+#contributors>div {
+    padding: 3px;
+    border: 1px solid $accent;
+    border-radius: 2px;
+}
+
+.acknowledgements {
+    column-count: 4;
+    column-gap: 20px;
+
+    li {
+        break-inside: avoid-column;
+    }
+}
+
+.tags {
+    display: flex;
+    align-items: center;
+}
+
+.tags dd {
+    display: flex;
+    gap: 1px 5px;
+    flex-wrap: wrap;
+}
+
+.tag {
+    background-color: $accent;
+    color: white;
+    padding: 5px;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+}
+
+.tag .tag-tooltip {
+    cursor: text;
+    display: none;
+    position: absolute;
+    top: 1.9em;
+    left: 0;
+    z-index: 99999;
+    border: 2px solid $accent;
+    border-radius: 5px;
+    background-color: var(--tooltip-bg);
+    color: var(--text-color);
+    padding: 3px;
+    width: max-content;
+    max-width: 500px;
+}
+
+.tag:hover .tag-tooltip,
+.tag-tooltip:hover {
+    display: inline-table;
+}
+
+
+.properties {
+    display: flex;
+    flex-direction: column;
+}
+
+.properties .row {
+    display: flex;
+    flex-direction: row;
+}
+
+.properties .middle {
+    display: flex;
+    align-items: center;
+}
+
+.properties .property {
+    font-weight: bold;
+    min-width: 205px;
+    width: 205px;
+    box-sizing: border-box;
+}
+
+.properties .property::after {
+    content: ':\00a0';
+    white-space: pre;
+}
+
+ol+h2.function-name {
+    margin-top: 2em;
+}
+
+ol {
+    padding: 0;
+}
+
+ol li+li {
+    margin-top: 1em;
+}
+
+ol li:only-child {
+    list-style: none
+}
+
+dl.row>dd {
+    margin: 0;
+}
+
+dl { /* Required for Chrome, default in Firefox */
+    margin: 0;
+}

@@ -1,0 +1,15 @@
+title: LOLPROX
+
+exclude: ['/Gemfile', '/Makefile', '/README.md', '/NOTICE.md', 'LICENSE', '.vscode/']
+
+permalink: pretty
+
+collections:
+  lolprox:
+    output: true
+
+defaults:
+  - scope:
+      path: '_lolprox'
+    values:
+      layout: 'bin'

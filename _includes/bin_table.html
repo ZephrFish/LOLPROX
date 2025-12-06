@@ -1,0 +1,92 @@
+<input type="text" id="bin-search" placeholder="Search by name, function (/), tag (#), or ATT&CK technique ID...">
+
+<table id="bin-table">
+    <thead>
+        <tr>
+            <th>Binary</th>
+            <th>Type</th>
+            <th>Functions</th>
+            <th>Tags</th>
+            <th>ATT&CK Techniques</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%- assign sorted_bins = site.lolprox | sort: "Name" -%}
+        {%- for bin in sorted_bins -%}
+        <tr>
+            <td class="bin-name"><a href="{{ bin.url | relative_url }}">{{ bin.Name }}</a></td>
+            <td class="bin-type">Binaries</td>
+            <td>{% include function_list.html bin=bin %}</td>
+            <td class="function-list">
+                {%- for command in bin.Commands -%}
+                    {%- if command.Tags -%}
+                        {%- for tag in command.Tags -%}
+                            <div>{{ tag }}</div>
+                        {%- endfor -%}
+                    {%- endif -%}
+                {%- endfor -%}
+            </td>
+            <td>{% include get_attack_tids.html bin=bin %}</td>
+        </tr>
+        {%- endfor -%}
+        <tr id="search-message"><td colspan="5">No binary matches your search query.</td></tr>
+    </tbody>
+</table>
+
+<script>
+    function filter(query) {
+        var table = document.getElementById('bin-table');
+        var rows = table.getElementsByTagName('tr');
+        var visibleCount = 0;
+
+        for (var i = 1; i < rows.length - 1; i++) {
+            var row = rows[i];
+            var binName = row.cells[0].textContent.toLowerCase();
+            var functions = row.cells[2].textContent.toLowerCase();
+            var tags = row.cells[3].textContent.toLowerCase();
+            var techniques = row.cells[4].textContent.toLowerCase();
+
+            var match = false;
+            if (query.startsWith('/')) {
+                match = functions.includes(query.substring(1));
+            } else if (query.startsWith('#')) {
+                match = tags.includes(query.substring(1));
+            } else {
+                match = binName.includes(query) || techniques.includes(query);
+            }
+
+            row.style.display = match ? '' : 'none';
+            if (match) visibleCount++;
+        }
+
+        document.getElementById('search-message').style.display = visibleCount === 0 ? '' : 'none';
+    }
+
+    document.getElementById('bin-search').addEventListener('input', function(e) {
+        var query = e.target.value.toLowerCase().trim();
+        filter(query);
+        if (query) {
+            window.location.hash = encodeURIComponent(query);
+        } else {
+            history.replaceState(null, null, ' ');
+        }
+    });
+
+    window.addEventListener('load', function() {
+        var hash = decodeURIComponent(window.location.hash.substring(1));
+        if (hash) {
+            document.getElementById('bin-search').value = hash;
+            filter(hash);
+        }
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            document.getElementById('bin-search').value = '';
+            filter('');
+            history.replaceState(null, null, ' ');
+        } else if (e.target.tagName !== 'INPUT' && /^[a-zA-Z/#]$/.test(e.key)) {
+            document.getElementById('bin-search').focus();
+        }
+    });
+</script>
