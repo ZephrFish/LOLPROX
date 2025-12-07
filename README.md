@@ -1,6 +1,10 @@
 # LOLPROX - Living Off The Land Proxmox
 
-A curated catalog of Proxmox VE binaries and techniques that adversaries use for post-exploitation operations. Inspired by [LOLESXi](https://lolesxi-project.github.io/LOLESXi/) and following the [LOLBAS](https://lolbas-project.github.io/) methodology.
+**Living Off The Land Proxmox** (LOLPROX) is the curated catalog of native Proxmox VE binaries and techniques that adversaries can abuse for post-exploitation operations.
+
+This project maintains a comprehensive list of binaries natively available in Proxmox VE that can be leveraged by adversaries during security assessments and red team operations. The documentation is compiled from real-world testing and threat research.
+
+For the full write-up on LOLPROX techniques and methodology, see the [blog post](https://blog.zsec.uk/lolprox/). For defensive guidance and detection strategies, see the [defense blog post](https://blog.zsec.uk/lolprox-defend/).
 
 ## Overview
 
