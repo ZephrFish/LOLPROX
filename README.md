@@ -8,7 +8,7 @@ For the full write-up on LOLPROX techniques and methodology, see the [blog post]
 
 LOLPROX frontend is available at [https://lolprox.yxz.red/](https://lolprox.yxz.red/)
 
-![LOLPROX screenshot](./lolprox.yxz.red.png)
+[![alt text](./lolprox.yxz.red.png)](https://lolprox.yxz.red/)
 
 ## Overview
 
