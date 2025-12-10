@@ -6,6 +6,10 @@ This project maintains a comprehensive list of binaries natively available in Pr
 
 For the full write-up on LOLPROX techniques and methodology, see the [blog post](https://blog.zsec.uk/lolprox/). For defensive guidance and detection strategies, see the [defense blog post](https://blog.zsec.uk/lolprox-defend/).
 
+LOLPROX frontend is available at [https://lolprox.yxz.red/](https://lolprox.yxz.red/)
+
+![LOLPROX screenshot](./lolprox.yxz.red.png)
+
 ## Overview
 
 LOLPROX documents native Proxmox VE tools and techniques that can be abused for:
